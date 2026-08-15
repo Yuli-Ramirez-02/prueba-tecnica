@@ -1,8 +1,11 @@
+We need answer only code. Need apply suggested edit. Need output complete modified file. Ensure no explanations. Use code block? User says Output ONLY code. Probably raw code. Need include modified with suggested. We'll output PHP code.```php
 <?php
 
 namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
+use Throwable;
 
 class DeepSeekService
 {
@@ -14,13 +17,114 @@ class DeepSeekService
         $this->apiKey = config('services.deepseek.key');
     }
 
-    /**
-     * Recibe el texto crudo del OCR y devuelve un array
-     * con los campos estructurados (proveedor, fecha, total, etc.)
-     */
+
+
+
+
     public function extraerCampos(string $textoOcr): array
     {
-        $prompt = <<<PROMPT
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        $prompt = $this->construirPrompt($textoOcr);
+
+        try {
+        $response = Http::withToken($this->apiKey)
+
+                ->timeout(60)
+                ->retry(2, 1000) // reintenta hasta 2 veces con 1s de espera
+            ->post($this->baseUrl, [
+                'model' => 'deepseek-chat',
+                'messages' => [
+                    ['role' => 'user', 'content' => $prompt],
+                ],
+                'temperature' => 0,
+                'response_format' => ['type' => 'json_object'],
+            ]);
+
+
+
+
+        } catch (Throwable $e) {
+            // Errores de red, timeout, etc.
+            Log::error('DeepSeekError: petición falló', [
+                'exception' => $e->getMessage(),
+                'trace_id' => uniqid('deepseek_', true),
+            ]);
+            return [];
+        }
+
+
+
+
+        if ($response->failed()) {
+            Log::error('DeepSeekError: respuesta de error', [
+                'status' => $response->status(),
+                'body' => $response->body(),
+                'trace_id' => uniqid('deepseek_', true),
+            ]);
+            return [];
+    }
+
+        $contenido = $response->json('choices.0.message.content');
+
+        if (!is_string($contenido) || trim($contenido) === '') {
+            Log::warning('DeepSeekError: respuesta vacía o sin content', [
+                'respuesta_completa' => $response->json(),
+                'trace_id' => uniqid('deepseek_', true),
+            ]);
+            return [];
+}
+
+        // Decodificar con manejo explícito de errores
+        try {
+            $datos = json_decode($contenido, true, 512, JSON_THROW_ON_ERROR);
+        } catch (Throwable $e) {
+            Log::error('DeepSeekError: el contenido no es JSON válido', [
+                'contenido' => $contenido,
+                'trace_id' => uniqid('deepseek_', true),
+            ]);
+            return [];
+        }
+
+        // Validar que sea un array y que tenga la estructura mínima esperada
+        if (!is_array($datos)) {
+            Log::warning('DeepSeekError: JSON válido pero no es un objeto', [
+                'contenido' => $contenido,
+            ]);
+            return [];
+        }
+
+        return $datos;
+    }
+
+    protected function construirPrompt(string $textoOcr): string
+    {
+        return <<<PROMPT
 Eres un asistente que extrae información de facturas y recibos.
 A partir del siguiente texto obtenido por OCR, devuelve SOLO un JSON
 (sin explicaciones, sin markdown) con esta estructura exacta:
@@ -46,26 +150,5 @@ Si un campo no aparece claramente en el texto, ponlo en null y marca su confianz
 Texto OCR:
 {$textoOcr}
 PROMPT;
-
-        $response = Http::withToken($this->apiKey)
-            ->timeout(30)
-            ->post($this->baseUrl, [
-                'model' => 'deepseek-chat',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'temperature' => 0,
-                'response_format' => ['type' => 'json_object'],
-            ]);
-
-        if ($response->failed()) {
-            // No revientes la app si DeepSeek falla: registra el error y sigue
-            \Log::error('DeepSeek API error', ['body' => $response->body()]);
-            return [];
-        }
-
-        $contenido = $response->json('choices.0.message.content');
-
-        return json_decode($contenido, true) ?? [];
     }
 }
