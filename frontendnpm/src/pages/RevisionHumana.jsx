@@ -1,5 +1,5 @@
-import { useRevisionHumana } from '../src/hooks/useRevisionHumana'
-import '../src/styles/RevisionHumana.css'
+import { useRevisionHumana } from '../hooks/useRevisionHumana'
+import '../styles/RevisionHumana.css'
 
 function RevisionHumana({ onNavigate }) {
   const {

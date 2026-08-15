@@ -1,5 +1,5 @@
-import { useSubirDocumento } from '../src/hooks/useSubirDocumento'
-import '../src/styles/SubirDocumento.css'
+import { useSubirDocumento } from '../hooks/useSubirDocumento'
+import '../styles/SubirDocumento.css'
 
 function SubirDocumento({ onNavigate }) {
   const {

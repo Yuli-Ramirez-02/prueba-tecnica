@@ -1,5 +1,5 @@
-import { useListaFacturas } from '../src/hooks/useListaFacturas'
-import '../src/styles/ListaFacturas.css'
+import { useListaFacturas } from '../hooks/useListaFacturas'
+import '../styles/ListaFacturas.css'
 
 const CAMPOS = [
   { key: 'proveedor', label: 'Proveedor', type: 'text' },

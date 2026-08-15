@@ -100,8 +100,3 @@ export function useListaFacturas() {
     eliminar,
   }
 }
-```tool
-TOOL_NAME: edit_existing_file
-BEGIN_ARG: filepath
-"frontendnpm/src/App.jsx"
-```
