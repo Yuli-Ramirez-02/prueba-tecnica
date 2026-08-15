@@ -1,0 +1,96 @@
+/* ===== Globales de la app ===== */
+.app-main {
+  min-height: 100vh;
+  background: #f1f5f9;
+}
+
+/* ===== Botones comunes ===== */
+.btn-primario {
+  background: #2563eb;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.btn-primario:hover {
+  background: #1d4ed8;
+}
+
+.btn-primario:disabled {
+  background: #93c5fd;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  background: #e2e8f0;
+  color: #1e293b;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.btn-secundario:hover {
+  background: #cbd5e1;
+}
+
+.btn-peligro {
+  background: #fee2e2;
+  color: #dc2626;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.btn-peligro:hover {
+  background: #fecaca;
+}
+
+.btn-editar {
+  background: #dbeafe;
+  color: #2563eb;
+  border: none;
+  padding: 0.4rem 0.7rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-editar:hover {
+  background: #bfdbfe;
+}
+
+/* ===== Mensajes de estado ===== */
+.mensaje-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.mensaje-exito {
+  background: #dcfce7;
+  color: #16a34a;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.confianza-alta {
+  color: #16a34a;
+}
+
+.confianza-baja {
+  color: #dc2626;
+}
+"

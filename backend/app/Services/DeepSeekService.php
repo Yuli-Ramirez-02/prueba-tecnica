@@ -1,4 +1,3 @@
-We need answer only code. Need apply suggested edit. Need output complete modified file. Ensure no explanations. Use code block? User says Output ONLY code. Probably raw code. Need include modified with suggested. We'll output PHP code.```php
 <?php
 
 namespace App\Services;
@@ -17,58 +16,22 @@ class DeepSeekService
         $this->apiKey = config('services.deepseek.key');
     }
 
-
-
-
-
     public function extraerCampos(string $textoOcr): array
     {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         $prompt = $this->construirPrompt($textoOcr);
 
         try {
-        $response = Http::withToken($this->apiKey)
-
+            $response = Http::withToken($this->apiKey)
                 ->timeout(60)
                 ->retry(2, 1000) // reintenta hasta 2 veces con 1s de espera
-            ->post($this->baseUrl, [
-                'model' => 'deepseek-chat',
-                'messages' => [
-                    ['role' => 'user', 'content' => $prompt],
-                ],
-                'temperature' => 0,
-                'response_format' => ['type' => 'json_object'],
-            ]);
-
-
-
-
+                ->post($this->baseUrl, [
+                    'model' => 'deepseek-chat',
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt],
+                    ],
+                    'temperature' => 0,
+                    'response_format' => ['type' => 'json_object'],
+                ]);
         } catch (Throwable $e) {
             // Errores de red, timeout, etc.
             Log::error('DeepSeekError: petición falló', [
@@ -78,9 +41,6 @@ class DeepSeekService
             return [];
         }
 
-
-
-
         if ($response->failed()) {
             Log::error('DeepSeekError: respuesta de error', [
                 'status' => $response->status(),
@@ -88,7 +48,7 @@ class DeepSeekService
                 'trace_id' => uniqid('deepseek_', true),
             ]);
             return [];
-    }
+        }
 
         $contenido = $response->json('choices.0.message.content');
 
@@ -98,7 +58,7 @@ class DeepSeekService
                 'trace_id' => uniqid('deepseek_', true),
             ]);
             return [];
-}
+        }
 
         // Decodificar con manejo explícito de errores
         try {

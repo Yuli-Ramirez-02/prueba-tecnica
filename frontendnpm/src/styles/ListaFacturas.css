@@ -1,0 +1,108 @@
+/* ===== Lista de Facturas ===== */
+.lista-contenedor {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.lista-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.lista-botones-header {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.lista-formulario {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.lista-grid-campos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.lista-campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.lista-campo label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.lista-campo input {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+  font-size: 0.9rem;
+}
+
+.lista-botones-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lista-tabla-wrapper {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.lista-tabla {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.lista-tabla th {
+  background: #f8fafc;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  color: #475569;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.lista-tabla td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.lista-tabla tbody tr:hover {
+  background: #f8fafc;
+}
+
+.lista-acciones {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.lista-cargando,
+.lista-vacio {
+  color: #64748b;
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+}

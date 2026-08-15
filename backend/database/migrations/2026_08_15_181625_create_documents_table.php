@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->id();
+            $table->string('proveedor')->nullable();
+            $table->string('numero_factura')->nullable();
+            $table->date('fecha')->nullable();
+            $table->decimal('subtotal', 12, 2)->nullable();
+            $table->decimal('impuestos', 12, 2)->nullable();
+            $table->decimal('total', 12, 2)->nullable();
+            $table->string('moneda')->nullable();
+            $table->string('categoria')->nullable();
+            $table->json('confianza')->nullable();
+            $table->string('ruta_archivo')->nullable();
+            $table->longText('texto_ocr')->nullable();
             $table->timestamps();
         });
     }
@@ -25,3 +36,4 @@ return new class extends Migration
         Schema::dropIfExists('documents');
     }
 };
+```

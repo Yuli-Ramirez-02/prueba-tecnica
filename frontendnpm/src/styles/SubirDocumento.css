@@ -1,0 +1,92 @@
+/* ===== Subir Documento ===== */
+.subir-contenedor {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.subir-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.subir-tarjeta {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.subir-tarjeta h3 {
+  margin-top: 0;
+  color: #1e293b;
+}
+
+.subir-archivo-info {
+  font-size: 0.9rem;
+  color: #475569;
+  margin-top: 0.5rem;
+}
+
+.subir-tarjeta input[type='file'] {
+  margin-bottom: 0.5rem;
+}
+
+.subir-tarjeta textarea {
+  width: 100%;
+  font-family: 'SFMono-Regular', Consolas, monospace;
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.subir-resultado {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.subir-grid-resultado {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.subir-grid-resultado p {
+  margin: 0;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.subir-confianza {
+  margin-top: 1rem;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.subir-confianza ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+.subir-confianza li {
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
